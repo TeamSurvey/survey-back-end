@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
+// require passport
+// require passport config file
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -36,6 +38,8 @@ app.use(session({
 		});
 	}
 }));
+// mount return value of `passport.initialize` invocation on `app`
+// mount return value of `passport.session` invocation on `app`
 
 app.use('/', routes);
 app.use('/users', users);
