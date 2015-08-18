@@ -6,4 +6,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/**AUTH ROUTES
+ *	a login route using `passport.authenticate`
+ *	a register route **not using passport**
+ *
+ */
+
+
 module.exports = router;
