@@ -34,6 +34,7 @@ router.route('/signup').
 	}).
 	post(function(req, res, next) {
 		if(!req.body || !req.body.username || !req.body.password) {
+			var err = new Error("No credentials.");
 			return next(err);
 		}
 
