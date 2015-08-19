@@ -1,6 +1,7 @@
 'use strict';
 // configure sequelize and import other models
 
+require('dotenv').load();
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize(process.env.SQL_DB,
 	process.env.SQL_USER,

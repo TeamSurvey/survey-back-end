@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -5,8 +7,10 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
+process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
 // require passport config file
+var passport = require('./lib/passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,11 +27,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
-	secret : "totally bogus secret dude",
+	secret : process.env.SESSION_SECRET,
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/sessions"
+		url : "mongodb://localhost/ga-passport-sessions"
 	}),
 	cookie : {
 		maxAge : 300000 // 5 minutes
@@ -39,7 +43,9 @@ app.use(session({
 	}
 }));
 // mount return value of `passport.initialize` invocation on `app`
+app.use(passport.initialize());
 // mount return value of `passport.session` invocation on `app`
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
