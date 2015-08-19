@@ -50,9 +50,9 @@ router.route('/signup').
 					localPass : hash
 				}).then(function(user) {
 					cb(null, user);
-				}).catch(cb);
+				}, cb);
 			}
-		], function(err, res) {
+		], function(err, result) {
 			if(err) {
 				// students will make error handler
 				return next(err);

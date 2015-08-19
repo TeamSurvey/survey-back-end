@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
 	var User = sequelize.define('User', {
 		id : {
 			type : DataTypes.INTEGER,
-			autoincrement : true,
+			autoIncrement : true,
 			primaryKey : true
 		},
 		localName : {
