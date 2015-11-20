@@ -1,0 +1,22 @@
+{
+  "name": "node-express-session",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^0.8.5",
+    "body-parser": "^1.13.2",
+    "connect-mongo": "^0.8.2",
+    "debug": "^2.2.0",
+    "dotenv": "^1.2.0",
+    "express": "^4.13.1",
+    "express-session": "^1.11.3",
+    "mongoose": "^4.2.6",
+    "morgan": "^1.6.1",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0",
+    "uuid": "^2.0.1"
+  }
+}
