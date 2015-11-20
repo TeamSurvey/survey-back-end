@@ -1,14 +1,21 @@
 'use strict';
 
 var bcrypt = require('bcrypt');
+var uniqueValidator = require('mongoose-unique-validator');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // export a mongoose model
 
 var userSchema = new Schema({
-	userName : String,
+	userName : {
+		type : String,
+		unique : true,
+		required : true
+	},
 	passwordDigest : String
 });
+
+userSchema.plugin(uniqueValidator);
 
 userSchema.methods.setPassword = function(password) {
 	var self = this;
