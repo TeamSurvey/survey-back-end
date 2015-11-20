@@ -10,7 +10,7 @@ var userSchema = new Schema({
 	passwordDigest : String
 });
 
-userSchema.virtual('password').set(function(password) {
+userSchema.methods.setPassword = function(password) {
 	var self = this;
 
 	var saltPromise = new Promise(function saltExec(res, rej) {
@@ -37,9 +37,10 @@ userSchema.virtual('password').set(function(password) {
 		});
 	}).then(function(digest) {
 		self.passwordDigest = digest;
+		return self.save();
 	});
 
 	return returnedPromise;
-});
+};
 
 module.exports = userSchema;
