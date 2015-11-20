@@ -17,6 +17,21 @@ var userSchema = new Schema({
 
 userSchema.plugin(uniqueValidator);
 
+userSchema.methods.comparePassword = function(password) {
+	var self = this;
+
+	return new Promise(function(res, rej) {
+		bcrypt.compare(password, self.passwordDigest, function(err, match) {
+			if(err) {
+				rej(err);
+				return;
+			}
+
+			res(match);
+		});
+	});
+};
+
 userSchema.methods.setPassword = function(password) {
 	var self = this;
 
