@@ -68,7 +68,9 @@ module.exports = {
                 });
             });
             pUser.then(function(user) {
-                user.setPassword(req.body.password);
+                return user.setPassword(req.body.password);
+            }).then(function() {
+                res.sendStatus(200);
             }).catch(function(err) {
                 next(err);
             });
