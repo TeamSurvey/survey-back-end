@@ -42,6 +42,4 @@ userSchema.virtual('password').set(function(password) {
 	return returnedPromise;
 });
 
-var User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = userSchema;
