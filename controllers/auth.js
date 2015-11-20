@@ -9,8 +9,8 @@ module.exports = {
     },
     root : {
         get : function(req, res) {
-            res.json('index', {
-                title : (req.user && req.user.localName) || 'Nobody'
+            res.json({
+                title : (req.user && req.user.userName) || 'Nobody'
             });
         }
     },
