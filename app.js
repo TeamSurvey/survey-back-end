@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
+var cors = require('cors');
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
 // require passport config file
@@ -15,6 +16,11 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+app.use(cors({
+  origin: ['http://localhost:5000'],
+  credentials: true
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -26,10 +32,10 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/ga-passport-sessions"
+		url : "mongodb://localhost/survey-sessions"
 	}),
 	cookie : {
-		maxAge : 300000 // 5 minutes
+		maxAge : 1200000 //total session length
 	},
 	genid : function() {
 		return uuid.v4({
