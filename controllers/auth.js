@@ -45,7 +45,7 @@ module.exports = {
                     res.sendStatus(200);
                 }).catch(function(err) {
                     next(err);
-                });            
+                });
         }
     },
     signup : {
@@ -70,7 +70,7 @@ module.exports = {
             pUser.then(function(user) {
                 return user.setPassword(req.body.password);
             }).then(function() {
-                res.sendStatus(200);
+                res.sendStatus(201);
             }).catch(function(err) {
                 next(err);
             });
