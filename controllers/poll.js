@@ -27,10 +27,11 @@ var read = function (req, res, next) {
   });
 };
 
-var create = function (title, choices, owner_id) {
+var create = function (title, choices, votes, owner_id) {
   Poll.create({
     'title': title,
     'choices': choices,
+    'votes': votes,
     'owner_id': owner_id
   });
 };
