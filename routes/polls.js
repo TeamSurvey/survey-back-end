@@ -2,44 +2,27 @@
 
 var express = require('express');
 var router = express.Router();
+var pollCtrl = require('../controllers/poll.js');
 
-var pollCtrl = //reuqire file here//
-
-//routing to an index action
-router.get('/', function(req, res, next) {
-  res.json({message: 'Hello, World!'});
-
-// var pollCtrl = require('../controllers/poll');
 
 //routing to an index action
-router.get('/', function(req, res, next) {
-  Poll.find().exec();
-
-  next();
-});
+router.get('/', pollCtrl.index);
 
 //routing to a show action
-router.get('/:id', function(req, res, next) {
+router.get('/:id', pollCtrl.read);
 
-  res.json({message: 'stuff'});
+//routing to a show action
+router.put('/:id', pollCtrl.update);
 
-  var poll_id = req.params.id;
+//routing to a show action
+router.delete('/:id', pollCtrl.destroy);
 
-  next();
-});
+// router.get('/', function(req, res) {
+//   res.json(res.locals.polls);
+//   res.status(200);
+// });
 
-router.get('/', function(req, res) {
-  res.json(res.locals.polls);
-  res.status(200);
-});
-
-
-
-
-
-router.post('/', function (req, res) {
-  res.json('POST request');
-});
+router.post('/', pollCtrl.create);
 
 router.post('/', function (req, res) {
   res.send('create request to homepage');
