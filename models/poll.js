@@ -7,28 +7,7 @@ var pollSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  choices: {
-    option01: {
-      type: String,
-      required: true
-    },
-    option02: {
-      type: String,
-      required: true
-    },
-    option03: {
-      type: String,
-      required: false
-    },
-    option04: {
-      type: String,
-      required: false
-    },
-    option05: {
-      type: String,
-      required: false
-    }
-  },
+  choices: [],
   owner_id: String,
   toJSON: {virtuals: true}
 });
