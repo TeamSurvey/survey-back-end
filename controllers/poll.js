@@ -24,7 +24,7 @@ var read = function (req, res, next) {
     res.json(poll);
   }).catch(function(error){
     next(error);
-  });
+  }).then(done);
 };
 
 var create = function (title, choices, votes, owner_id) {
