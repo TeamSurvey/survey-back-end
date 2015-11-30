@@ -30,11 +30,7 @@ var read = function (req, res, next) {
 var create = function (title, choices, owner_id) {
   Poll.create({
     'title': title,
-    'choices.option01': choices.option01,
-    'choices.option02': choices.option02,
-    'choices.option03': choices.option03,
-    'choices.option04': choices.option04,
-    'choices.option05': choices.option05,
+    'choices': choices,
     'owner_id': owner_id
   });
 };
