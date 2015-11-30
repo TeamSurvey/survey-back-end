@@ -11,8 +11,9 @@ router.get('/', authCtrl.root.get);
  *
  */
 router.route('/login').
-	get(authCtrl.deny).
-	post(authCtrl.login.post);
+    get(authCtrl.deny).
+    post(authCtrl.login.post).
+    all(authCtrl.login.all);
 
 router.route('/logout').
 	all(authCtrl.logout.all);
