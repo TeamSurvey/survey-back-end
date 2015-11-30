@@ -8,6 +8,7 @@ var pollSchema = new mongoose.Schema({
     required: true
   },
   choices: [],
+  votes: [],
   owner_id: String,
   toJSON: {virtuals: true}
 });
