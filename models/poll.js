@@ -9,8 +9,11 @@ var pollSchema = new mongoose.Schema({
   },
   choices: [],
   votes: [],
-  owner_id: String,
-  toJSON: {virtuals: true}
+  pollURL: {
+    type: String,
+    required: true
+  },
+  owner_id: String
 });
 
 var Poll = mongoose.model('Poll', pollSchema);
