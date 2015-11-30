@@ -39,6 +39,7 @@ router.get('/', function(req, res) {
 
 router.post('/', function (req, res) {
   res.json('POST request');
+});
 
 router.post('/', function (req, res) {
   res.send('create request to homepage');
