@@ -8,15 +8,15 @@ var done = function () {
   db.close();
 };
 
-var create = function (title, options, owner_id) {
-  Poll.create({
-    'title': title,
-    'options': options,
-    'owner_id': owner_id
-  }).then(function(poll) {
-    console.log(poll);
-  }).catch(console.error).then(done);
-};
+// var create = function (title, options, owner_id) {
+//   Poll.create({
+//     'title': title,
+//     'options': options,
+//     'owner_id': owner_id
+//   }).then(function(poll) {
+//     console.log(poll);
+//   }).catch(console.error).then(done);;
+// };
 
 var read = function (req, res, next) {
   Poll.find({"_id": req.params.id}).exec()
@@ -43,6 +43,12 @@ var update = function(id, field, value) {
     return poll.save();
   }).then(function(poll) {
     console.log(poll.toJSON());
+  }).catch(console.error).then(done);
+};
+
+var destroy = function (id) {
+  Poll.findById(id).exec().then(function(poll) {
+    return poll.remove();
   }).catch(console.error).then(done);
 };
 
@@ -78,10 +84,10 @@ db.once('open', function() {
       var value = process.argv[5];
       update(id, field, value);
     break;
-    // case 'd':
-    //   id = process.argv[3];
-    //   destroy(id);
-    // break;
+    case 'd':
+      id = process.argv[3];
+      destroy(id);
+    break;
     default:
       index();
     break;
@@ -89,3 +95,8 @@ db.once('open', function() {
 });
 
 
+// var poll = {
+//   "title": "Your fav drink?",
+//   "options": "['beer', 'wine', 'scotch']",
+//   "owner_id": "asd7858dsn4"}
+//   JSON.parse(poll)
