@@ -1,10 +1,8 @@
 
 'use strict';
 
-var mongoose = require('mongoose');
 var Poll = require('../models/poll');
-mongoose.Promise = global.Promise;
-module.exports = mongoose.connection;
+var User = require('../models/User');
 
 var done = function() {
   db.close();
@@ -27,17 +25,18 @@ var read = function (req, res, next) {
   }).then(done);
 };
 
-var create = function (title, choices, votes, owner_id) {
+var create = function (title, options, owner_id) {
   Poll.create({
     'title': title,
-    'choices': choices,
-    'votes': votes,
+    'options': options,
     'owner_id': owner_id
-  });
+  }).then(function(poll) {
+    console.log(poll);
+  }).catch(console.error).then(done);;
 };
 
+//UPDATE TITLE OF POLL
 var update = function(id, field, value) {
-  // use this option
   var modify = {};
   modify[field] = value;
   Poll.findByIdAndUpdate(id, { $set: modify }, { new: true }).exec().then(function(poll) {
