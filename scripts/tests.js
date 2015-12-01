@@ -27,15 +27,6 @@ var read = function (req, res, next) {
   }).then(done);
 };
 
-// var update = function(id, field, value) {
-//   var modify = {};
-//   modify[field] = value;
-//   Poll.findByIdAndUpdate(id, { $set: modify }, { new: true }).exec().then(function(poll) {
-//     console.log(poll.toJSON());
-//   }).catch(console.error
-//   ).then(done);
-// };
-
 var update = function(id, field, value) {
   Poll.findById(id).exec().then(function(poll) {
     poll[field] = value; //this line breaks for given_name and surname due to nested schema
@@ -72,7 +63,7 @@ db.once('open', function() {
       id = process.argv[3];
       var criterion = process.argv[4];
       if(!criterion) {
-        console.log('usage: r <field> <criterion');
+        console.log('usage: r <field> <criterion>');
         done();
       }else {
         read(field, criterion);
@@ -93,10 +84,3 @@ db.once('open', function() {
     break;
   }
 });
-
-
-// var poll = {
-//   "title": "Your fav drink?",
-//   "options": "['beer', 'wine', 'scotch']",
-//   "owner_id": "asd7858dsn4"}
-//   JSON.parse(poll)
