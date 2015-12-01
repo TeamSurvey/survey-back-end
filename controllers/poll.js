@@ -54,6 +54,7 @@ var destroy = function (id) {
 module.exports = {
   index,
   read,
+  create,
   destroy,
   update
 };
