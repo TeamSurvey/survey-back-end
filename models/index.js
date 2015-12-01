@@ -1,10 +1,10 @@
-// 'use strict';
+'use strict';
 
-// // var mongoose = require('mongoose');
-// // mongoose.Promise = Promise;
+var mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
-// // mongoose.model('User', require('./User'));
+mongoose.model('User', require('./User'));
 
-// // mongoose.connect("mongodb://localhost/survey");
+mongoose.connect("mongodb://localhost/survey");
 
-// // module.exports = mongoose;
+module.exports = mongoose;
