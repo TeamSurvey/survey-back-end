@@ -9,6 +9,10 @@ var pollSchema = new mongoose.Schema({
   },
   options: {
     type: []
+  },
+  owner_id: {
+    type: String,
+    required: true
   }
 });
 
