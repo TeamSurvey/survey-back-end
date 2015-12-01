@@ -7,15 +7,9 @@ var pollSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  choices: [
-    {option: }
-  ],
-  votes: [],
-  pollURL: {
-    type: String,
-    required: true
-  },
-  owner_id: String
+  options: {
+    type: []
+  }
 });
 
 var Poll = mongoose.model('Poll', pollSchema);
