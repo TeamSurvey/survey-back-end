@@ -8,15 +8,15 @@ var done = function () {
   db.close();
 };
 
-// var create = function (title, options, owner_id) {
-//   Poll.create({
-//     'title': title,
-//     'options': options,
-//     'owner_id': owner_id
-//   }).then(function(poll) {
-//     console.log(poll);
-//   }).catch(console.error).then(done);;
-// };
+var create = function (title, options, owner_id) {
+  Poll.create({
+    'title': title,
+    'options': options,
+    'owner_id': owner_id
+  }).then(function(poll) {
+    console.log(poll);
+  }).catch(console.error).then(done);;
+};
 
 var read = function (req, res, next) {
   Poll.find({"_id": req.params.id}).exec()
@@ -59,7 +59,7 @@ db.once('open', function() {
   switch(command) {
     case 'c':
     var title = process.argv[3];
-    var options = process.argv[4];
+    var options = process.argv[4].split(',').map(function(name){ return name.trim(); });
     var owner_id = process.argv[5];
     if (true || title) {
       create(title, options, owner_id);
