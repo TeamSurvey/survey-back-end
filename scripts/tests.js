@@ -1,11 +1,6 @@
 'use strict'
 
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/survey');
-
-var db = mongoose.connection;
-
+var db = require('../lib/db.js')
 var pollcontroller = require('../controllers/poll');
 var Poll = require('../models/poll');
 
@@ -13,12 +8,10 @@ var done = function () {
   db.close();
 };
 
-var create = function (title, choices, votes, pollURL, owner_id) {
+var create = function (title, options, owner_id) {
   Poll.create({
     'title': title,
-    'choices': choices,
-    'votes': votes,
-    'pollURL': pollURL,
+    'options': options,
     'owner_id': owner_id
   }).then(function(poll) {
     console.log(poll);
@@ -32,13 +25,12 @@ db.once('open', function() {
   switch(command) {
     case 'c':
     var title = process.argv[3];
-    var choices = process.argv[4];
-    var votes = process.argv[5];
-    var pollURL = process.argv[6];
+    var options = process.argv[4];
+    var owner_id = process.argv[5];
     if (true || title) {
-      create(title, choices, votes);
+      create(title, options, owner_id);
     } else {
-      console.log('usage c <title> <choices> <votes>');
+      console.log('usage c <title> <options> <owner_id>');
       done();
     }
     break;
