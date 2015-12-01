@@ -10,3 +10,4 @@ db.polls.insert([
     votes: []
   }
 ]);
+
