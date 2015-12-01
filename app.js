@@ -1,5 +1,5 @@
 'use strict';
-var db = require('/lib/db.js');
+var db = require('./lib/db.js');
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
