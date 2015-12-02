@@ -1,7 +1,7 @@
 'use strict'
 
 var mongoose = require('mongoose');
-var pollID = require('/models/poll');
+var pollID = require('./poll');
 
 var pollAnswerSchema = new mongoose.Schema({
   pollID: {
