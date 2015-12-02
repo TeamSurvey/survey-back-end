@@ -1,6 +1,7 @@
 'use strict';
 var db = require('./models/index.js');
 var express = require('express');
+var util = require('util');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
