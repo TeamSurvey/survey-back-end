@@ -1,6 +1,7 @@
 
 'use strict';
 
+require('../app.js');
 var Poll = require('../models/poll');
 var User = require('../models/User');
 
