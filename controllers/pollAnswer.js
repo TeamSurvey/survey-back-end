@@ -7,9 +7,10 @@ var done = function() {
 };
 
 var read = function (req, res, next) {
-  Poll.find({"_id": req.params.id}).exec()
-  .then(function(poll){
-    res.json(poll);
+  pollAnswer.find({"_id": req.body.pollID}).exec()
+  .then(function(pollAnswer){
+    var agg = pollAnswer.aggregate({$match: {"pollID": }})
+    res.json(agg);
   }).catch(function(error){
     next(error);
   }).then(done);
