@@ -1,0 +1,15 @@
+// Curl commands to test
+
+
+//CREATE
+curl --request POST --header "Content-Type: application/json" -d '{"title":"title1", "owner_id":1, "options": ["one", "two"]}' http://localhost:3000/polls
+
+//DELETE
+curl -X DELETE http://localhost:3000/modelName/ID
+
+// INDEX
+curl http://localhost:3000/modelName
+
+// READ
+curl http://localhost:3000/modelName/ID
+
