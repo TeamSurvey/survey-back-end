@@ -6,14 +6,6 @@ var done = function() {
   db.close();
 };
 
-// var index = function() {
-//   Poll.find().exec().then(function(poll) {
-//     polls.forEach(function(poll) {
-//       console.log(poll.toJSON());
-//     });
-//   }).catch(console.error).then(done);
-// };
-
 var read = function (req, res, next) {
   Poll.find({"_id": req.params.id}).exec()
   .then(function(poll){
@@ -24,14 +16,15 @@ var read = function (req, res, next) {
 };
 
 var create = function (pollID, answer) {
-  Poll.create({
+  pollAnswer.create({
     'pollID': pollID,
     'answer': answer
-  });
+  }).then(function(pollAnswer) {
+    console.log(pollAnswer);
+  }).catch(console.error).then(done);;
 };
 
 module.exports = {
-  //index,
   read,
   create
 };
