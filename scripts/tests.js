@@ -1,8 +1,18 @@
-'use strict'
+'use strict';
 
-var db = require('../lib/db.js')
-var pollcontroller = require('../controllers/poll');
-var Poll = require('../models/poll');
+var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+
+require('../controllers/poll.js');
+require('../models/pollAnswer.js');
+require('../models/pollAnswer.js');
+mongoose.model('User', require('../models/User'));
+var Poll = mongoose.model('Poll', require('../models/poll'));
+mongoose.model('pollAnswer', require('../models/pollAnswer'));
+
+mongoose.connect("mongodb://localhost/survey");
+var db = mongoose.connection;
+
 
 var done = function () {
   db.close();
@@ -15,16 +25,25 @@ var create = function (title, options, owner_id) {
     'owner_id': owner_id
   }).then(function(poll) {
     console.log(poll);
-  }).catch(console.error).then(done);;
+  }).catch(console.error).then(done);
 };
 
-var read = function (req, res, next) {
-  Poll.find({"_id": req.params.id}).exec()
-  .then(function(poll){
-    res.json(poll);
-  }).catch(function(error){
-    next(error);
-  }).then(done);
+var read = function (field, criterion) {
+  var search = {};
+  search[field] = criterion;
+  // console.log(criterion);
+  // if(criterion[0] === '/') {
+  //   search[field] = new RegExp(criterion.slice(1, criterion.length-1));
+  //   console.log()
+  // } else {
+  //   search[field] = criterion;
+  // }
+
+  Poll.find(search).exec().then(function (polls) {
+    polls.forEach(function(poll) {
+      console.log("test" + poll.toObject());
+    });
+  }).catch(console.error).then(done);
 };
 
 var update = function(id, field, value) {
@@ -84,3 +103,14 @@ db.once('open', function() {
     break;
   }
 });
+
+
+
+// var read = function (req, res, next) {
+//   Poll.find({"_id": req.params.id}).exec()
+//   .then(function(poll){
+//     res.json(poll);
+//   }).catch(function(error){
+//     next(error);
+//   }).then(done);
+// };
