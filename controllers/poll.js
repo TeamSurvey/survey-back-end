@@ -37,16 +37,6 @@ var create = function (req, res, next) {
   }).catch(console.error).then(done);;
 };
 
-//UPDATE TITLE OF POLL
-// var update = function(req, res, next) {
-//   var modify = {};
-//   modify[field] = value;
-//   Poll.findByIdAndUpdate(id, { $set: modify }, { new: true }).exec().then(function(poll) {
-//     console.log(poll.toJSON());
-//   }).catch(console.error
-//   ).then(done);
-// };
-
 var update = function (req, res, next) {
   console.log("here are update params: " + util.inspect(req.body));
   Poll.findByIdAndUpdate(req.body.id, { $set: req.body.title }, { new: true }).exec().then(function(poll) {
@@ -54,12 +44,6 @@ var update = function (req, res, next) {
   })
   .catch(console.error).then(done);
 };
-
-// var destroy = function (id) {
-//   Poll.findById(id).exec().then(function(poll) {
-//     return poll.remove();
-//   }).catch(console.error).then(done);
-// };
 
 var destroy = function (req, res, next) {
   Poll.findByIdAndRemove(req.params.id).exec()
