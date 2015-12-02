@@ -28,22 +28,33 @@ var create = function (title, options, owner_id) {
   }).catch(console.error).then(done);
 };
 
-var read = function (field, criterion) {
-  var search = {};
-  search[field] = criterion;
-  // console.log(criterion);
-  // if(criterion[0] === '/') {
-  //   search[field] = new RegExp(criterion.slice(1, criterion.length-1));
-  //   console.log()
-  // } else {
-  //   search[field] = criterion;
-  // }
+// var read = function (field, criterion) {
+//   var search = {};
+//   search[field] = criterion;
+//   // console.log(criterion);
+//   // if(criterion[0] === '/') {
+//   //   search[field] = new RegExp(criterion.slice(1, criterion.length-1));
+//   //   console.log()
+//   // } else {
+//   //   search[field] = criterion;
+//   // }
 
-  Poll.find(search).exec().then(function (polls) {
-    polls.forEach(function(poll) {
-      console.log("test" + poll.toObject());
-    });
-  }).catch(console.error).then(done);
+//   Poll.find(search).exec().then(function (polls) {
+//     polls.forEach(function(poll) {
+//       console.log("test" + poll.toObject());
+//     });
+//   }).catch(console.error).then(done);
+// };
+
+var read = function (req, res, next) {
+  var id = req.body.id;
+  Poll.findOne(id).exec()
+  .then(function(poll){
+    res.json({poll});
+    console.log("test1");
+  }).catch(function(error){
+    next(error);
+  });
 };
 
 var update = function(id, field, value) {
@@ -81,12 +92,13 @@ db.once('open', function() {
     case 'r':
       id = process.argv[3];
       var criterion = process.argv[4];
-      if(!criterion) {
-        console.log('usage: r <field> <criterion>');
-        done();
-      }else {
+      // if(!criterion) {
+      //   console.log('usage: r <field> <criterion>');
+      //   done();
+      // }else {
         read(field, criterion);
-      }
+        console.log("test2");
+      // }
     break;
     case 'u':
       id = process.argv[3];
