@@ -27,10 +27,13 @@ var read = function (req, res, next) {
 
 var create = function (req, res, next) {
   console.log("here are the create params " + util.inspect(req.body));
+  console.log('req.user is ' + req.user);
+
+  var options = [req.body.option01, req.body.option02, req.body.option03, req.body.option04, req.body.option05];
   Poll.create({
     'title': req.body.title,
-    'options': req.body.options,
-    'owner_id': req.body.owner_id
+    'options': options,
+    'owner_id': req.user.id
   }).then(function(poll) {
     res.json(poll);
   }).catch(function(error){
