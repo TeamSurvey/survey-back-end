@@ -9,6 +9,6 @@ router.get('/', pollCtrl.index);
 
 router.post('/', pollAnswerCtrl.create);
 
-router.get('/:id', pollAnswerCtrl.read);
+router.get('/:pollID', pollAnswerCtrl.read);
 
 module.exports = router;
