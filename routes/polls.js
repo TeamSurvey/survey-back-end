@@ -10,7 +10,7 @@ router.post('/', pollCtrl.create);
 
 router.get('/:id', pollCtrl.read);
 
-router.put('/:id', pollCtrl.update);
+router.patch('/:id', pollCtrl.update);
 
 router.delete('/:id', pollCtrl.destroy);
 
