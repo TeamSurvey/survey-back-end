@@ -1,19 +1,18 @@
 
 'use strict';
+
 var util = require('util');
 var Poll = require('../models/poll');
 var User = require('../models/User');
-
-var done = function() {
-  db.close();
-};
 
 var index = function(req, res, next) {
   console.log("executing index route ");
   Poll.find().exec().then(function(polls) {
     console.log("my polls are = " + polls);
     res.json(polls);
-  }).catch(console.error).then(done);
+  }).catch(function(error){
+    next(error);
+  });
 };
 
 var read = function (req, res, next) {
@@ -23,7 +22,7 @@ var read = function (req, res, next) {
     res.json(poll);
   }).catch(function(error){
     next(error);
-  }).then(done);
+  });
 };
 
 var create = function (req, res, next) {
@@ -34,15 +33,23 @@ var create = function (req, res, next) {
     'owner_id': req.body.owner_id
   }).then(function(poll) {
     res.json(poll);
-  }).catch(console.error).then(done);;
+  }).catch(function(error){
+    next(error);
+  });
 };
 
 var update = function (req, res, next) {
-  console.log("here are update params: " + util.inspect(req.body));
-  Poll.findByIdAndUpdate(req.body.id, { $set: req.body.title }, { new: true }).exec().then(function(poll) {
+  console.log("here are update params: " + req.params.id);
+  console.log("log of req.body.title: " + req.body.title);
+  console.log("log of req.params.title: " + req.params.title);
+  Poll.findOneAndUpdate({"_id": req.params.id}, {$set: {title: req.body.poll.title}}, {new: true}).exec()
+  .then(function(poll) {
+    console.log("This poll is being returned: " + poll);
     res.json(poll);
   })
-  .catch(console.error).then(done);
+  .catch(function(error){
+    next(error);
+  });
 };
 
 var destroy = function (req, res, next) {
@@ -50,9 +57,9 @@ var destroy = function (req, res, next) {
   .then(function() {
     res.json('Succesfully Deleted');
   })
-  .catch(function(error) {
+  .catch(function(error){
     next(error);
-  }).then(done);
+  });
 };
 
 module.exports = {
