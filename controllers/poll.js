@@ -33,7 +33,7 @@ var create = function (req, res, next) {
     'options': req.body.options,
     'owner_id': req.body.owner_id
   }).then(function(poll) {
-    console.log(poll);
+    res.json(poll);
   }).catch(console.error).then(done);;
 };
 
