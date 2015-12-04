@@ -42,10 +42,17 @@ var create = function (req, res, next) {
 };
 
 var update = function (req, res, next) {
-  console.log("here are update params: " + req.params.id);
-  console.log("log of req.body.title: " + req.body.title);
-  console.log("log of req.params.title: " + req.params.title);
-  Poll.findOneAndUpdate({"_id": req.params.id}, {$set: {title: req.body.poll.title}}, {new: true}).exec()
+  console.log(typeof req.params);
+  console.log(req.params.id);
+  console.log(req.body);
+  console.log(req.body.title);
+  // console.log("req.params.keys: " + req.params.keys.toString());
+  // console.log("req.params.id: " + req.params.id);
+  // console.log("req.body.title: " + req.body.title);
+  // console.log("log of req.params.keys: " + req.params.keys.toString());
+  // console.log("log of req.params.poll: " + req.params.poll);
+
+  Poll.findOneAndUpdate({"_id": req.params.id}, {$set: {title: req.body.title}}, {new: true}).exec()
   .then(function(poll) {
     console.log("This poll is being returned: " + poll);
     res.json(poll);
