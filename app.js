@@ -1,11 +1,13 @@
 'use strict';
-
+var db = require('./models/index.js');
 var express = require('express');
+var util = require('util');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var uuid = require('uuid');
 var MongoStore = require('connect-mongo')(session);
+var cors = require('cors');
 process.env.SESSION_SECRET || require('dotenv').load();
 // require passport
 // require passport config file
@@ -13,8 +15,15 @@ var passport = require('./lib/passport');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var polls = require('./routes/polls');
+var pollAnswers = require('./routes/pollAnswers');
 
 var app = express();
+
+app.use(cors({
+  origin: ['http://localhost:5000'],
+  credentials: true
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -29,7 +38,7 @@ app.use(session({
 		url : "mongodb://localhost/survey-sessions"
 	}),
 	cookie : {
-		maxAge : 300000 // 5 minutes
+		maxAge : 1200000 //total session length
 	},
 	genid : function() {
 		return uuid.v4({
@@ -46,6 +55,8 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/polls', polls);
+app.use('/pollAnswers', pollAnswers);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

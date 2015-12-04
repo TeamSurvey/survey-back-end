@@ -1,5 +1,7 @@
 'use strict';
 
+// new auth controller from Saad 11/30
+
 var passport = require('passport');
 var User = require('../models').model('User');
 
@@ -15,10 +17,10 @@ module.exports = {
         }
     },
     login : {
-        post : passport.authenticate('local', {
-            successRedirect : '/',
-            failureRedirect : '/'
-        })
+        post : passport.authenticate('local'),
+        all : function(req, res) {
+            res.sendStatus(200);
+        }
     },
     logout : {
         all : function(req, res, next) {
@@ -45,7 +47,7 @@ module.exports = {
                     res.sendStatus(200);
                 }).catch(function(err) {
                     next(err);
-                });            
+                });
         }
     },
     signup : {
