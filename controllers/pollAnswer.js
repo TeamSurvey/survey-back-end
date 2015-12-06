@@ -17,7 +17,7 @@ var read = function (req, res, next) {
 var create = function (req, res, next) {
   console.log("here are the pollAnswer create params " + util.inspect(req.body));
   pollAnswer.create({
-    'pollID': req.body.currentPollId, //CHANGE THIS. THE VAL WILL FROM FROM FRONT END HTML DATA-ATTR
+    'pollID': req.body.pollID, //CHANGE THIS. THE VAL WILL FROM FROM FRONT END HTML DATA-ATTR
     'answer': req.body.answer
   }).then(function(pollAnswer) {
     res.json(pollAnswer);
