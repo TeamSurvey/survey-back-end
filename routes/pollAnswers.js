@@ -5,7 +5,7 @@ var router = express.Router();
 var pollCtrl = require('../controllers/poll.js');
 var pollAnswerCtrl = require('../controllers/pollAnswer.js');
 
-router.get('/', pollCtrl.index);
+// router.get('/', pollAnswerCtrl.index);
 
 router.post('/', pollAnswerCtrl.create);
 
