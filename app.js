@@ -21,9 +21,9 @@ var pollAnswers = require('./routes/pollAnswers');
 var app = express();
 
 app.use(cors({
-  origin: ['http://localhost:5000'],
+  origin: ['http://teamsurvey.github.io/survey-front-end'],
   credentials: true
-}));
+})); //http://localhost:5000
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -35,7 +35,7 @@ app.use(session({
 	resave : false,
 	saveUninitialized : false,
 	store : new MongoStore({
-		url : "mongodb://localhost/survey-sessions"
+		url : process.env.MONGOLAB_URI //"mongodb://localhost/survey-sessions"
 	}),
 	cookie : {
 		maxAge : 1200000 //total session length

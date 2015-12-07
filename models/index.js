@@ -7,6 +7,6 @@ mongoose.model('User', require('./User'));
 mongoose.model('Poll', require('./poll'));
 mongoose.model('pollAnswer', require('./pollAnswer'));
 
-mongoose.connect("mongodb://localhost/survey");
+mongoose.connect(process.env.MONGOLAB_URI); //"mongodb://localhost/survey"
 
 module.exports = mongoose;
