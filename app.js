@@ -21,7 +21,7 @@ var pollAnswers = require('./routes/pollAnswers');
 var app = express();
 
 app.use(cors({
-  origin: ['http://teamsurvey.github.io/survey-front-end'],
+  origin: ['http://teamsurvey.github.io'],
   credentials: true
 })); //http://localhost:5000
 
