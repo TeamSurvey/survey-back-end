@@ -1,6 +1,7 @@
 'use strict';
 var db = require('./models/index.js');
 var express = require('express');
+var path = require('path');
 var util = require('util');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
@@ -21,12 +22,15 @@ var pollAnswers = require('./routes/pollAnswers');
 var app = express();
 
 app.use(cors({
-  origin: ['http://teamsurvey.github.io'],
+  origin: ['http://localhost:5000', 'http://teamsurvey.github.io' ],
   credentials: true
 })); //http://localhost:5000
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
